@@ -766,7 +766,7 @@ class DgiiReport(models.Model):
         # fill IT-1 excel file
         cwf = os.path.join(os.path.dirname(os.path.abspath(__file__)), "IT-1-2017.xlsx")
         wb = load_workbook(cwf)
-        ws1 = wb.get_sheet_by_name("IT-1")  # Get sheet 1 in writeable copy
+        ws1 = wb["IT-1"]  # Get sheet 1 in writeable copy
         xls_dict["it1"].update({"S43": self.positive_balance})
         for k, v in xls_dict["it1"].items():
             ws1[k] = v
@@ -783,7 +783,7 @@ class DgiiReport(models.Model):
         # fill IR-17 excel file
         cwf = os.path.join(os.path.dirname(os.path.abspath(__file__)), "IR-17-2015.xlsx")
         wb = load_workbook(cwf)
-        ws1 = wb.get_sheet_by_name("IR17")  # Get sheet 1 in writeable copy
+        ws1 = wb["IR17"]  # Get sheet 1 in writeable copy
         for k, v in xls_dict["ir17"].items():
             ws1[k] = v
 

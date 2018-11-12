@@ -342,12 +342,30 @@
                                         </td>
                                     </tr>
                                     <tr>
+                                        <th>NC para Consumidor final</th>
+                                        <td class="tg-yw4l text-center">
+                                            <field name="count_nc_final"/>
+                                        </td>
+                                        <td class="tg-yw4l text-right">
+                                            <field name="amount_nc_final"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
                                         <th>Para credito fiscal</th>
                                         <td class="tg-yw4l text-center">
                                             <field name="count_fiscal"/>
                                         </td>
                                         <td class="tg-yw4l text-right">
                                             <field name="amount_fiscal"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>NC para credito fiscal</th>
+                                        <td class="tg-yw4l text-center">
+                                            <field name="count_nc_fiscal"/>
+                                        </td>
+                                        <td class="tg-yw4l text-right">
+                                            <field name="amount_nc_fiscal"/>
                                         </td>
                                     </tr>
                                     <tr>

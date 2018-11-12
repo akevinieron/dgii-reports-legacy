@@ -136,7 +136,9 @@ class DgiiReport(models.Model):
 
         summary_dict = {
             "final": {"count": 0, "amount": 0.0},
+            "nc_final": {"count": 0, "amount": 0.0},
             "fiscal": {"count": 0, "amount": 0.0},
+            "nc_fiscal": {"count": 0, "amount": 0.0},
             "gov": {"count": 0, "amount": 0.0},
             "special": {"count": 0, "amount": 0.0},
             "unico": {"count": 0, "amount": 0.0},
@@ -156,24 +158,31 @@ class DgiiReport(models.Model):
                     rec.SALE_TOTAL_MONTO_NC += sale.MONTO_FACTURADO
                     # TODO falta manejar las notas de credito que afectan facturas de otro periodo.
                     rec.MONTO_FACTURADO_EXCENTO -= sale.MONTO_FACTURADO_EXCENTO
+
+                    summary_dict["nc_{}".format(sale.invoice_id.sale_fiscal_type)]["count"] += 1
+                    summary_dict["nc_{}".format(sale.invoice_id.sale_fiscal_type)]["amount"] += sale.MONTO_FACTURADO
                 else:
                     rec.SALE_ITBIS_TOTAL += sale.ITBIS_FACTURADO
                     rec.SALE_TOTAL_MONTO_FACTURADO += sale.MONTO_FACTURADO
                     rec.MONTO_FACTURADO_EXCENTO += sale.MONTO_FACTURADO_EXCENTO
 
-                summary_dict[sale.invoice_id.sale_fiscal_type]["count"] += 1
-                summary_dict[sale.invoice_id.sale_fiscal_type]["amount"] += sale.MONTO_FACTURADO
+                    summary_dict[sale.invoice_id.sale_fiscal_type]["count"] += 1
+                    summary_dict[sale.invoice_id.sale_fiscal_type]["amount"] += sale.MONTO_FACTURADO
 
             rec.SALE_ITBIS_CHARGED = rec.SALE_ITBIS_TOTAL - rec.SALE_ITBIS_NC
             rec.SALE_TOTAL_MONTO_CHARGED = rec.SALE_TOTAL_MONTO_FACTURADO - rec.SALE_TOTAL_MONTO_NC
 
             rec.count_final = summary_dict["final"]["count"]
+            rec.count_nc_final = summary_dict["nc_final"]["count"]
             rec.count_fiscal = summary_dict["fiscal"]["count"]
+            rec.count_nc_fiscal = summary_dict["nc_fiscal"]["count"]
             rec.count_gov = summary_dict["gov"]["count"]
             rec.count_special = summary_dict["special"]["count"]
             rec.count_unico = summary_dict["unico"]["count"]
             rec.amount_final = summary_dict["final"]["amount"]
+            rec.amount_nc_final = summary_dict["nc_final"]["amount"]
             rec.amount_fiscal = summary_dict["fiscal"]["amount"]
+            rec.amount_nc_fiscal = summary_dict["nc_fiscal"]["amount"]
             rec.amount_gov = summary_dict["gov"]["amount"]
             rec.amount_special = summary_dict["special"]["amount"]
             rec.amount_unico = summary_dict["unico"]["amount"]
@@ -265,12 +274,16 @@ class DgiiReport(models.Model):
 
     # 607 type summary
     count_final = fields.Integer(compute=_sale_report_totals)
+    count_nc_final = fields.Integer(compute=_sale_report_totals)
     count_fiscal = fields.Integer(compute=_sale_report_totals)
+    count_nc_fiscal = fields.Integer(compute=_sale_report_totals)
     count_gov = fields.Integer(compute=_sale_report_totals)
     count_special = fields.Integer(compute=_sale_report_totals)
     count_unico = fields.Integer(compute=_sale_report_totals)
     amount_final = fields.Integer(compute=_sale_report_totals)
+    amount_nc_final = fields.Integer(compute=_sale_report_totals)
     amount_fiscal = fields.Integer(compute=_sale_report_totals)
+    amount_nc_fiscal = fields.Integer(compute=_sale_report_totals)
     amount_gov = fields.Integer(compute=_sale_report_totals)
     amount_special = fields.Integer(compute=_sale_report_totals)
     amount_unico = fields.Integer(compute=_sale_report_totals)

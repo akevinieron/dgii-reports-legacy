@@ -37,20 +37,29 @@
     'name': "Reportes Declaraciones DGII",
 
     'summary': """
-        Este modulo agrega los reportes declarativos de la DGII.
+        Este modulo agrega los reportes declarativos (anterior a mayo 2018) de la DGII basado en el módulo de 
+        localización creado originalmente por Marcos.do (Eneldo Serrata) y posteriormente mantenido por la comunidad
+        Odoo Dominicana.
     """,
 
     'description': """
-        Este modulo agrega los reportes declarativos de la DGII.     
+        Este modulo agrega los reportes declarativos (anterior a mayo 2018) de la DGII basado en el módulo de 
+        localización creado originalmente por Marcos.do (Eneldo Serrata) y posteriormente mantenido por la comunidad
+        Odoo Dominicana.
+        
+        El repositorio de origen se estuvo manteniendo hasta la version 10 de Odoo. El objetivo de este repositorio es
+        agregar los reportes existentes a la version 11 de Odoo e integrarlo a la nueva localización creada por la 
+        comunidad Odoo Dominicana (dicha localización fue creada desde 0). Algunos campos y/o vistas podrían no ser del
+        todo necesarias.
     """,
 
-    'author': "Marcos Organizador de Negocios SRL - Write by Eneldo Serrata",
-    'website': "http://marcos.do",
+    'author': "Kevin Jiménez, Eneldo Serrata",
+    'website': "http://kevinjimenezweb.com",
 
     'category': 'Localization',
 
     # any module necessary for this one to work correctly
-    'depends': ['base', 'account_invoicing', 'account', 'account_payment'],
+    'depends': ['base', 'account_invoicing', 'account', 'account_payment', 'ncf_manager'],
 
     # always loaded
     'data': [

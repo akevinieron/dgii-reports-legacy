@@ -810,7 +810,7 @@ class DgiiReport(models.Model):
             })
 
     def generate_txt_files(self):
-        company_fiscal_identificacion = re.sub(u"[^0-9]", "", self.company_id.vat)
+        company_fiscal_identificacion = re.sub("[^0-9]", "", self.company_id.vat)
         period = self.name.split("/")
         month = period[0]
         year = period[1]
